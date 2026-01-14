@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Wishes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .page {
+            display: none;
+            position: relative;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1;
+        }
+        .page.active {
+            display: flex;
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        .smaller-h1 {
+            font-size: 3em; /* Made smaller */
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        p {
+            font-size: 1.8em;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin: 20px 0;
+        }
+        .blue-text {
+            color: #007bff; /* Blue color */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .red-text {
+            color: #ff0000; /* Red color */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.4em;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        /* Decorations */
+        .decoration {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+        .decoration:nth-child(1) { top: 10%; left: 10%; }
+        .decoration:nth-child(2) { top: 20%; right: 15%; }
+        .decoration:nth-child(3) { bottom: 15%; left: 20%; }
+        .decoration:nth-child(4) { bottom: 10%; right: 10%; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        /* Falling hearts animation */
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 2em;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+        @keyframes fall {
+            0% {
+                top: -10px;
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="decoration">🎈</div>
+    <div class="decoration">🎂</div>
+    <div class="decoration">🎉</div>
+    <div class="decoration">🌟</div>
+
+    <div id="page1" class="page active">
+        <h1>Happy Birthday Sona!</h1>
+        <button onclick="nextPage()">Continue</button>
+    </div>
+    <div id="page2" class="page">
+        <h1 class="smaller-h1">HAPPY BIRTHDAY Sapana!</h1>
+        <p class="blue-text">Stay maxx and be happy forever</p>
+        <p class="red-text">Happy Birthday 🎉 I hope today brings you as much happiness as you bring to everyone around you.</p>
+    </div>
+
+    <script>
+        // Start hearts on page load for both pages
+        startHearts();
+
+        function nextPage() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+        }
+
+        function startHearts() {
+            const container = document.body;
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
